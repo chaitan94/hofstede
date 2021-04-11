@@ -1,0 +1,27 @@
+.countriesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+.countryPanel {
+  background: white;
+  padding: 8px;
+}
+
+.countryScore {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.countryRank {
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.countryTitle {
+  display: flex;
+  justify-content: center;
+  font-weight: 700;
+}
