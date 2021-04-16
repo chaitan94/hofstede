@@ -25,6 +25,14 @@ const App: React.FC = () => {
     );
   }, [setFactorValues]);
 
+  const handleOpposite = useCallback(() => {
+    setFactorValues(
+      Object.fromEntries(
+        Object.entries(factorValues).map(([k, v]) => [k, 100 - v])
+      ) as HofstedeValues
+    );
+  }, [factorValues, setFactorValues]);
+
   return (
     <Row gutter={16} style={{ padding: 16 }}>
       <Col span={8}>
@@ -46,7 +54,7 @@ const App: React.FC = () => {
             <Button icon={<RetweetOutlined />} onClick={handleRandomize}>
               Randomize
             </Button>
-            <Button disabled icon={<BlockOutlined />}>
+            <Button icon={<BlockOutlined />} onClick={handleOpposite}>
               Opposite
             </Button>
           </div>
