@@ -1,3 +1,14 @@
+.lhs {
+  display: grid;
+  gap: 16px;
+}
+
+.toolBox {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 16px;
+}
+
 .countriesGrid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

@@ -1,23 +1,31 @@
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { Col, InputNumber, Row, Slider, Tooltip } from "antd";
-import React from "react";
+import React, { useCallback } from "react";
 import { HOFSTEDE } from "./constants";
-import { HofstedeValues } from "./interfaces";
+import { HofstedeFactor, HofstedeValues } from "./interfaces";
 
 interface Props {
   values: HofstedeValues;
   onChange: (values: HofstedeValues) => void;
 }
 
-const SliderSet: React.FC<Props> = ({ values, onChange }) => {
-  const _onChange = (category: string, v: number) => {
-    onChange({ ...values, [category]: v });
-  };
+const HofstedeSliders: React.FC<Props> = ({ values, onChange }) => {
+  const _onChange = useCallback(
+    (category: string, v: number) => {
+      onChange({ ...values, [category]: v });
+    },
+    [values, onChange]
+  );
+
+  const factors = (Object.values(
+    HofstedeFactor
+  ) as unknown) as HofstedeFactor[];
 
   return (
-    <div>
-      {Object.entries(values).map(([category, value]) => {
+    <>
+      {factors.map((category) => {
         const c = HOFSTEDE.getColumn(category);
+        const value = values[category];
         return (
           <Row key={category}>
             <Col span={10}>
@@ -51,8 +59,8 @@ const SliderSet: React.FC<Props> = ({ values, onChange }) => {
           </Row>
         );
       })}
-    </div>
+    </>
   );
 };
 
-export default SliderSet;
+export default HofstedeSliders;

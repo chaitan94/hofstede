@@ -1,18 +1,18 @@
 import * as z from "zebras";
 import { HOFSTEDE } from "./constants";
 import _df from "./countries.json";
-import { HofstedeValues } from "./interfaces";
+import { CountryData, HofstedeValues } from "./interfaces";
 
 let dfCache: any = null;
 
-const getDF = () => {
+export const getDF = (): CountryData[] => {
   if (dfCache !== null) {
     return dfCache;
   }
   if (!_df || !Array.isArray(_df) || _df.length === 0) {
     throw new Error("Invalid JSON.");
   }
-  dfCache = (_df as unknown) as HofstedeValues[];
+  dfCache = (_df as unknown) as CountryData[];
   return dfCache;
 };
 
@@ -51,13 +51,13 @@ export const rank = (values: HofstedeValues, options: Options) => {
       (MAX_HF_DISTANCE - hofstedeDistance(values, row)) / MAX_HF_DISTANCE
   );
   const score_col = "SCORE";
-  df = z.addCol(score_col, score, df);
+  let mdf = z.addCol(score_col, score, df);
 
-  df = z.sortByCol(score_col, "desc", df);
+  mdf = z.sortByCol(score_col, "desc", mdf);
 
   if (options.limit) {
-    df = df.slice(0, options.limit);
+    mdf = mdf.slice(0, options.limit);
   }
 
-  return df;
+  return mdf;
 };
