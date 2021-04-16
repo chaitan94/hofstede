@@ -1,17 +1,29 @@
 import { BlockOutlined, RetweetOutlined } from "@ant-design/icons";
 import { Alert, Button, Card, Col, Row } from "antd";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import styles from "./App.module.css";
 import { defaultFactorValues } from "./constants";
 import CountriesGrid from "./CountriesGrid";
 import CountrySelect from "./CountrySelect";
 import { getDF } from "./functions";
 import HofstedeSliders from "./HofstedeSliders";
+import { HofstedeFactor, HofstedeValues } from "./interfaces";
 
 const App: React.FC = () => {
   const [factorValues, setFactorValues] = useState(() => defaultFactorValues);
 
   const countries = getDF();
+
+  const handleRandomize = useCallback(() => {
+    setFactorValues(
+      Object.fromEntries(
+        Object.values(HofstedeFactor).map((f) => [
+          f,
+          Math.ceil(Math.random() * 100),
+        ])
+      ) as HofstedeValues
+    );
+  }, [setFactorValues]);
 
   return (
     <Row gutter={16} style={{ padding: 16 }}>
@@ -31,7 +43,7 @@ const App: React.FC = () => {
               factorValues={factorValues}
               setFactorValues={setFactorValues}
             />
-            <Button disabled icon={<RetweetOutlined />}>
+            <Button icon={<RetweetOutlined />} onClick={handleRandomize}>
               Randomize
             </Button>
             <Button disabled icon={<BlockOutlined />}>
