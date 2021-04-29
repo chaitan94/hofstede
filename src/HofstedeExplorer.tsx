@@ -34,8 +34,8 @@ const HofstedeExplorer: React.FC = () => {
   }, [factorValues, setFactorValues]);
 
   return (
-    <Row gutter={16} style={{ padding: 16 }}>
-      <Col span={8}>
+    <Row gutter={16} style={{ padding: 16 }} justify="space-around">
+      <Col md={8} sm={24}>
         <div className={styles.lhs}>
           <Card title="Hofstede criteria">
             <HofstedeSliders values={factorValues} onChange={setFactorValues} />
@@ -56,7 +56,7 @@ const HofstedeExplorer: React.FC = () => {
           </div>
         </div>
       </Col>
-      <Col span={16}>
+      <Col md={16} sm={24}>
         <CountriesGrid factorValues={factorValues} />
       </Col>
     </Row>

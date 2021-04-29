@@ -7,7 +7,8 @@ const Home: React.FC = () => {
     <div
       style={{
         padding: "10vw",
-        display: "flex",
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
         gap: 32,
       }}
     >

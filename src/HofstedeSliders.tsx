@@ -28,7 +28,7 @@ const HofstedeSliders: React.FC<Props> = ({ values, onChange }) => {
         const value = values[category];
         return (
           <Row key={category}>
-            <Col span={10}>
+            <Col md={10} sm={24} xs={24}>
               <Tooltip
                 title={c?.name + ": " + c?.description}
                 placement="right"
@@ -39,7 +39,7 @@ const HofstedeSliders: React.FC<Props> = ({ values, onChange }) => {
                 </b>
               </Tooltip>
             </Col>
-            <Col span={10}>
+            <Col md={10} sm={20} xs={20}>
               <Slider
                 min={0}
                 max={100}
@@ -47,7 +47,7 @@ const HofstedeSliders: React.FC<Props> = ({ values, onChange }) => {
                 value={typeof value === "number" ? value : 0}
               />
             </Col>
-            <Col span={4}>
+            <Col md={4} sm={4} xs={4}>
               <InputNumber
                 min={0}
                 max={100}

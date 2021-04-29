@@ -23,7 +23,7 @@ const HofstedeMap: React.FC = () => {
 
   return (
     <Row>
-      <Col span={8}>
+      <Col md={8} sm={24} xs={24}>
         <div
           style={{
             display: "flex",
@@ -51,7 +51,7 @@ const HofstedeMap: React.FC = () => {
           )}
         </div>
       </Col>
-      <Col span={16}>
+      <Col md={16} sm={24} xs={24}>
         <MapContainer
           center={[1.6, -1]}
           zoomSnap={0.25}
