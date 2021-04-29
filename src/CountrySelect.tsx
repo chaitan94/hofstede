@@ -1,32 +1,39 @@
 import { Select } from "antd";
 import React, { useCallback } from "react";
-import { CountryData, HofstedeValues } from "./interfaces";
+import { CountryData } from "./interfaces";
 
 interface Props {
   countries: CountryData[];
-  factorValues: HofstedeValues;
-  setFactorValues: (v: HofstedeValues) => void;
+  onSelect?: (v: CountryData) => void;
+  onClear?: () => void;
+  placeholder?: string;
 }
 
-const CountrySelect: React.FC<Props> = ({ countries, setFactorValues }) => {
+const CountrySelect: React.FC<Props> = ({
+  countries,
+  onSelect,
+  onClear,
+  placeholder,
+}) => {
   const handleCountrySelected = useCallback(
     (country_id: number) => {
       const idx = countries.findIndex((c) => c.id === country_id);
       if (idx !== -1) {
-        setFactorValues(countries[idx]);
+        if (onSelect) onSelect(countries[idx]);
       }
     },
-    [countries, setFactorValues]
+    [countries, onSelect]
   );
 
   return (
     <Select
       style={{ width: "100%" }}
-      placeholder="Load country data.."
+      placeholder={placeholder || "Select a country.."}
       showSearch
       allowClear
       optionFilterProp="children"
       onChange={handleCountrySelected}
+      onClear={onClear}
     >
       {countries.map((country) => (
         <Select.Option key={country.id} value={country.id}>

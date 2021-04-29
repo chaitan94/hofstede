@@ -1,6 +1,6 @@
 import { Progress } from "antd";
 import React, { useMemo } from "react";
-import styles from "./App.module.css";
+import styles from "./HofstedeExplorer.module.css";
 import { rank } from "./functions";
 import HofstedeChart from "./HofstedeChart";
 import { HofstedeValues } from "./interfaces";
@@ -23,7 +23,7 @@ const CountriesGrid: React.FC<Props> = ({ factorValues }) => {
     <div className={styles.countriesGrid}>
       {ranked.map((e: any, i: number) => {
         return (
-          <div className={styles.countryPanel}>
+          <div key={e.id} className={styles.countryPanel}>
             <div className={styles.countryScore}>
               <span>
                 <span>#</span>

@@ -10,14 +10,14 @@ import { HOFSTEDE } from "./constants";
 import { HofstedeValues } from "./interfaces";
 
 interface Props {
-  inputValues: HofstedeValues;
+  inputValues?: HofstedeValues;
   countryValues: HofstedeValues;
 }
 
 const HofstedeChart: React.FC<Props> = ({ inputValues, countryValues }) => {
   const data = HOFSTEDE.cols.map((col) => ({
     value: countryValues[col.key],
-    input: inputValues[col.key],
+    input: inputValues && inputValues[col.key],
     title: col.key.toUpperCase(),
   }));
 
@@ -26,7 +26,9 @@ const HofstedeChart: React.FC<Props> = ({ inputValues, countryValues }) => {
       <PolarGrid />
       <PolarAngleAxis dataKey="title" />
       <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} />
-      <Radar dataKey="input" stroke="#999" fill="#999" fillOpacity={0.6} />
+      {inputValues && (
+        <Radar dataKey="input" stroke="#999" fill="#999" fillOpacity={0.6} />
+      )}
       <Radar
         dataKey="value"
         stroke="#6699cc"
